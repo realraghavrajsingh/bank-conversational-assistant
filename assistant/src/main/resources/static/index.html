@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lakeside Bank Assistant</title>
+<style>
+  :root {
+    --bg: #f4f2ee; --panel: #ffffff; --ink: #1d2320; --muted: #6b726e; --line: #e3e0d9;
+    --brand: #0f5c4a; --brand-ink: #ffffff; --me: #0f5c4a; --me-ink: #ffffff; --bot: #f1efe9;
+    --chip: #e8f0ec; --chip-ink: #0f5c4a; --err: #a33a2b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121614; --panel: #1a1f1c; --ink: #e8ece9; --muted: #98a19c; --line: #2b322e;
+      --brand: #3fb48f; --brand-ink: #0b1210; --me: #2f8f71; --me-ink: #ffffff; --bot: #232a26;
+      --chip: #1f2d27; --chip-ink: #8fd8bd; --err: #ff8a78; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .app { max-width: 720px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; padding: 16px; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 8px 0 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: -0.01em; }
+  .logo { width: 30px; height: 30px; border-radius: 8px; background: var(--brand); color: var(--brand-ink);
+    display: grid; place-items: center; font-weight: 700; }
+  .who { color: var(--muted); font-size: 13px; display: flex; gap: 12px; align-items: center; }
+  button { font: inherit; cursor: pointer; }
+  .link { background: none; border: 0; color: var(--brand); padding: 0; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; }
+  /* login */
+  #login { padding: 28px; margin-top: 8vh; }
+  #login h1 { font-size: 22px; margin: 0 0 6px; letter-spacing: -0.02em; }
+  #login p { color: var(--muted); margin: 0 0 20px; }
+  .customers { display: grid; gap: 10px; }
+  .customers button { text-align: left; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--ink); display: flex; justify-content: space-between; }
+  .customers button:hover { border-color: var(--brand); }
+  .customers small { color: var(--muted); }
+  /* chat */
+  #chat { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  #log { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; min-height: 50vh; }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; white-space: pre-wrap; word-wrap: break-word; }
+  .me { align-self: flex-end; background: var(--me); color: var(--me-ink); border-bottom-right-radius: 4px; }
+  .bot { align-self: flex-start; background: var(--bot); border-bottom-left-radius: 4px; }
+  .bot.error { color: var(--err); }
+  .trace { align-self: flex-start; display: flex; flex-wrap: wrap; gap: 6px; margin-top: -6px; }
+  .trace span { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); color: var(--chip-ink);
+    padding: 2px 8px; border-radius: 999px; }
+  .trace span.fail { opacity: .7; text-decoration: line-through; }
+  .typing { align-self: flex-start; color: var(--muted); font-size: 13px; padding: 0 4px; }
+  .suggestions { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 12px; }
+  .suggestions button { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 999px;
+    padding: 6px 12px; font-size: 13px; }
+  .suggestions button:hover { border-color: var(--brand); color: var(--brand); }
+  form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
+  input[type=text] { flex: 1; font: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink); outline: none; }
+  input[type=text]:focus { border-color: var(--brand); }
+  .send { border: 0; border-radius: 12px; padding: 0 18px; background: var(--brand); color: var(--brand-ink); font-weight: 600; }
+  .send:disabled { opacity: .5; cursor: default; }
+  .note { color: var(--muted); font-size: 12px; text-align: center; padding: 10px 0 0; }
+  label.toggle { display: flex; gap: 6px; align-items: center; cursor: pointer; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><div class="logo">L</div>Lakeside Bank Assistant</div>
+    <div class="who" id="who" hidden>
+      <label class="toggle"><input type="checkbox" id="showTrace"> details</label>
+      <span id="whoName"></span>
+      <button class="link" id="logout">Sign out</button>
+    </div>
+  </header>
+
+  <section id="login" class="card">
+    <h1>Sign in</h1>
+    <p>Simulated sign-in. In production you'd already be authenticated in the bank's app. All data is synthetic.</p>
+    <div class="customers" id="customers"><small>Loading…</small></div>
+  </section>
+
+  <section id="chat" class="card" hidden>
+    <div id="log" aria-live="polite"></div>
+    <div class="suggestions" id="suggestions">
+      <button>What's my balance?</button>
+      <button>What was the Amazon debit yesterday?</button>
+      <button>Why was I charged 500?</button>
+      <button>Send me a cheque book</button>
+    </div>
+    <form id="form" autocomplete="off">
+      <input type="text" id="input" maxlength="1000" placeholder="Ask about your balance, a debit, or a cheque book…" aria-label="Message">
+      <button class="send" id="send">Send</button>
+    </form>
+  </section>
+  <div class="note">Demo build · mocked banking services · no real customer data</div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let token = sessionStorage.getItem("token");
+let name = sessionStorage.getItem("name");
+
+async function api(path, opts = {}) {
+  const headers = { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) };
+  const res = await fetch(path, { ...opts, headers });
+  if (res.status === 401 && token) { signOut(); throw new Error("Your session expired. Please sign in again."); }
+  const body = res.status === 204 ? null : await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body?.message ?? `Request failed (${res.status})`);
+  return body;
+}
+
+function add(cls, text) {
+  const el = document.createElement("div");
+  el.className = `msg ${cls}`;
+  el.textContent = text;            // never innerHTML: replies are untrusted text
+  $("log").appendChild(el);
+  $("log").scrollTop = $("log").scrollHeight;
+  return el;
+}
+
+function addTrace(trace) {
+  if (!trace?.length) return;
+  const wrap = document.createElement("div");
+  wrap.className = "trace";
+  wrap.hidden = !$("showTrace").checked;
+  for (const t of trace) {
+    const s = document.createElement("span");
+    s.textContent = `${t.tool}${t.ok ? "" : " · " + t.error} · ${t.ms}ms`;
+    s.title = JSON.stringify(t.arguments);
+    if (!t.ok) s.classList.add("fail");
+    wrap.appendChild(s);
+  }
+  $("log").appendChild(wrap);
+}
+
+async function send(text) {
+  text = text.trim();
+  if (!text) return;
+  $("suggestions").hidden = true;
+  add("me", text);
+  $("input").value = ""; $("send").disabled = true;
+  const typing = document.createElement("div");
+  typing.className = "typing"; typing.textContent = "Assistant is typing…";
+  $("log").appendChild(typing);
+  try {
+    const r = await api("/api/chat", { method: "POST", body: JSON.stringify({ message: text }) });
+    typing.remove();
+    add("bot", r.reply);
+    addTrace(r.trace);
+  } catch (e) {
+    typing.remove();
+    add("bot error", e.message);
+  } finally {
+    $("send").disabled = false; $("input").focus();
+  }
+}
+
+function showChat() {
+  $("login").hidden = true; $("chat").hidden = false; $("who").hidden = false;
+  $("whoName").textContent = name;
+  if (!$("log").children.length) add("bot", `Hi ${name.split(" ")[0]}! I can check your balance, explain a debit, or order a cheque book. What can I do for you?`);
+  $("input").focus();
+}
+
+function signOut() {
+  if (token) fetch("/api/session", { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }).catch(() => {});
+  token = name = null; sessionStorage.clear();
+  $("log").replaceChildren(); $("suggestions").hidden = false;
+  $("chat").hidden = true; $("who").hidden = true; $("login").hidden = false;
+  loadCustomers();
+}
+
+async function loadCustomers() {
+  const box = $("customers");
+  try {
+    const { customers } = await api("/api/demo/customers");
+    box.replaceChildren(...customers.map((c) => {
+      const b = document.createElement("button");
+      const n = document.createElement("span"); n.textContent = c.display_name;
+      const id = document.createElement("small"); id.textContent = c.customer_id;
+      b.append(n, id);
+      b.onclick = async () => {
+        try {
+          const s = await api("/api/session", { method: "POST", body: JSON.stringify({ customer_id: c.customer_id }) });
+          token = s.token; name = s.display_name;
+          sessionStorage.setItem("token", token); sessionStorage.setItem("name", name);
+          showChat();
+        } catch (e) { alert(e.message); }
+      };
+      return b;
+    }));
+  } catch (e) {
+    box.textContent = `Couldn't load demo customers: ${e.message}. Is the mock bank running?`;
+  }
+}
+
+$("form").onsubmit = (e) => { e.preventDefault(); send($("input").value); };
+$("suggestions").onclick = (e) => { if (e.target.tagName === "BUTTON") send(e.target.textContent); };
+$("logout").onclick = signOut;
+$("showTrace").onchange = () => document.querySelectorAll(".trace").forEach((t) => (t.hidden = !$("showTrace").checked));
+
+if (token && name) showChat(); else loadCustomers();
+</script>
+</body>
+</html>

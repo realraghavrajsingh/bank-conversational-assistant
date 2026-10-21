@@ -1,0 +1,20 @@
+services:
+  mock-bank:
+    build:
+      context: .
+      target: mock-bank
+    environment:
+      BANK_SERVICE_KEY: ${BANK_SERVICE_KEY:-dev-bank-service-key}
+    # Not published to the host: only the assistant can reach core banking.
+    expose: ["8001"]
+
+  assistant:
+    build:
+      context: .
+      target: assistant
+    env_file: .env
+    environment:
+      BANK_BASE_URL: http://mock-bank:8001
+      BANK_SERVICE_KEY: ${BANK_SERVICE_KEY:-dev-bank-service-key}
+    ports: ["8000:8000"]
+    depends_on: [mock-bank]

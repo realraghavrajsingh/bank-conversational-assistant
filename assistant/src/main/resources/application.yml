@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: assistant
+  config:
+    # Local runs pick up the repo-root .env (from the root or from the module directory).
+    import:
+      - optional:file:.env[.properties]
+      - optional:file:../.env[.properties]
+
+server:
+  port: 8000
+
+assistant:
+  llm:
+    provider: ${LLM_PROVIDER:gemini}            # gemini | openai (any OpenAI-compatible endpoint)
+    timeout: 30s
+    gemini:
+      api-key: ${GEMINI_API_KEY:}
+      model: ${GEMINI_MODEL:gemini-3.8-flash}
+      base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com/v1beta}
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      model: ${OPENAI_MODEL:gpt-5-mini}
+      base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}
+  bank:
+    base-url: ${BANK_BASE_URL:http://localhost:8001}
+    service-key: ${BANK_SERVICE_KEY:dev-bank-service-key}
+    timeout: 5s
+  session-ttl: 30m
+  demo-login-enabled: ${DEMO_LOGIN_ENABLED:true}
+  max-message-chars: 1000
+  max-turns-per-minute: 12
+  max-agent-steps: 6
+  history-max-messages: 40
+  pending-action-ttl: 10m
+  timezone: Asia/Kolkata

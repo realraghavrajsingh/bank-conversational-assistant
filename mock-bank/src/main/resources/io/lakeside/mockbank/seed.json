@@ -1,0 +1,96 @@
+{
+  "_comment": "Synthetic data only. Dates are expressed as days_ago and materialised relative to service start so 'yesterday' / 'last week' always resolve. Balances are derived from opening_balance + transactions.",
+  "customers": [
+    {
+      "customer_id": "CUST-1001",
+      "display_name": "Aarav Mehta",
+      "registered_address": {"line1": "Flat 12B, Lakeview Residency", "city": "Bengaluru", "pincode": "560034"},
+      "accounts": [
+        {
+          "account_id": "ACC-1001-SB",
+          "account_number": "50100045214521",
+          "type": "Savings",
+          "product": "Classic Savings",
+          "currency": "INR",
+          "opening_balance": "48210.55",
+          "cheque_book_eligible": true,
+          "transactions": [
+            {"id": "TXN-90001", "days_ago": 16, "direction": "credit", "amount": "92500.00", "descriptor": "NEFT/SALARY/ORBIT SOFTWARE PVT LTD", "channel": "NEFT", "merchant": {"name": "Orbit Software Pvt Ltd", "category": "Salary"}, "explanation": "Monthly salary credited by your employer via NEFT."},
+            {"id": "TXN-90002", "days_ago": 15, "direction": "debit", "amount": "28750.00", "descriptor": "NACH DR/SUNRISE HOME FIN/EMI0045", "channel": "NACH", "merchant": {"name": "Sunrise Home Finance Ltd", "category": "Loan EMI"}, "recurring": true, "mandate_ref": "UMRN-SUNH0000045", "explanation": "Monthly home-loan EMI auto-debited under your NACH mandate with Sunrise Home Finance."},
+            {"id": "TXN-90003", "days_ago": 13, "direction": "debit", "amount": "649.00", "descriptor": "POS 4521 NETFLIX.COM MUMBAI", "channel": "Debit Card (online)", "merchant": {"name": "Netflix Entertainment Services India LLP", "category": "Subscriptions"}, "recurring": true, "explanation": "Monthly Netflix subscription charged to your debit card ending 4521 as a standing card-on-file payment."},
+            {"id": "TXN-90004", "days_ago": 11, "direction": "debit", "amount": "4999.00", "descriptor": "POS 4521 RZP*TECHNOVA SOLUTIONS BLR", "channel": "Debit Card (online)", "merchant": {"name": "Technova Solutions Pvt Ltd", "category": "Education", "processor": "Razorpay"}, "explanation": "Online payment to Technova Solutions (an online course provider) processed through the Razorpay payment gateway, which is why the statement shows 'RZP*'."},
+            {"id": "TXN-90005", "days_ago": 9, "direction": "debit", "amount": "10000.00", "descriptor": "ATM WDL/HSR LAYOUT SEC 2/BLR", "channel": "ATM", "merchant": {"name": "ATM cash withdrawal", "category": "Cash"}, "location": "HSR Layout Sector 2, Bengaluru", "explanation": "Cash withdrawn at the ATM in HSR Layout Sector 2, Bengaluru using your debit card."},
+            {"id": "TXN-90006", "days_ago": 7, "direction": "debit", "amount": "2384.00", "descriptor": "BBPS/CITYPOWER DISTRIB/CA88231", "channel": "BBPS", "merchant": {"name": "City Power Distribution Co.", "category": "Utilities"}, "explanation": "Electricity bill payment for consumer account CA88231 made through the Bharat Bill Payment System."},
+            {"id": "TXN-90007", "days_ago": 5, "direction": "debit", "amount": "412.50", "descriptor": "UPI/SWIGGY/412501/Food order", "channel": "UPI", "merchant": {"name": "Swiggy (Bundl Technologies)", "category": "Food delivery"}, "explanation": "UPI payment for a Swiggy food order."},
+            {"id": "TXN-90008", "days_ago": 4, "direction": "debit", "amount": "236.00", "descriptor": "POS 4521 UBER *TRIP HELP.UBER.COM", "channel": "Debit Card (online)", "merchant": {"name": "Uber India Systems Pvt Ltd", "category": "Transport"}, "explanation": "Uber ride charged to your debit card ending 4521 (morning trip, ref UBR-7731)."},
+            {"id": "TXN-90009", "days_ago": 4, "direction": "debit", "amount": "236.00", "descriptor": "POS 4521 UBER *TRIP HELP.UBER.COM", "channel": "Debit Card (online)", "merchant": {"name": "Uber India Systems Pvt Ltd", "category": "Transport"}, "explanation": "A second, separate Uber ride charged to your debit card ending 4521 (evening trip, ref UBR-7766). It has the same fare as the morning trip but a different trip reference, so it is not a duplicate charge."},
+            {"id": "TXN-90010", "days_ago": 3, "direction": "debit", "amount": "500.00", "descriptor": "DC ANNUAL FEE 4521 + GST", "channel": "Bank charge", "merchant": {"name": "Bank charges", "category": "Fees"}, "explanation": "Annual maintenance fee for your debit card ending 4521: Rs 423.73 fee plus Rs 76.27 GST (18%)."},
+            {"id": "TXN-90011", "days_ago": 2, "direction": "debit", "amount": "1500.00", "descriptor": "UPI/P2A/RAHUL K/Dinner split", "channel": "UPI", "merchant": {"name": "Rahul K (personal transfer)", "category": "Transfers"}, "explanation": "UPI transfer you sent to Rahul K with the note 'Dinner split'."},
+            {"id": "TXN-90012", "days_ago": 1, "direction": "debit", "amount": "1899.00", "descriptor": "POS 4521 AMZN MKTP IN*2K4P9", "channel": "Debit Card (online)", "merchant": {"name": "Amazon Seller Services (Amazon.in Marketplace)", "category": "Shopping"}, "explanation": "Purchase on the Amazon.in marketplace charged to your debit card ending 4521. 'AMZN MKTP IN' is how Amazon marketplace orders appear on statements."},
+            {"id": "TXN-90013", "days_ago": 0, "direction": "debit", "amount": "1240.00", "status": "pending", "descriptor": "POS 4521 DECATHLON SARJAPUR", "channel": "Debit Card (in-store)", "merchant": {"name": "Decathlon Sports India", "category": "Shopping"}, "location": "Sarjapur Road, Bengaluru", "explanation": "In-store card payment at Decathlon, Sarjapur Road. It is still pending authorisation and will settle within 1-2 days; the amount is already held from your available balance."}
+          ]
+        },
+        {
+          "account_id": "ACC-1001-CA",
+          "account_number": "50200077887788",
+          "type": "Current",
+          "product": "Business Current",
+          "currency": "INR",
+          "opening_balance": "215400.00",
+          "cheque_book_eligible": true,
+          "transactions": [
+            {"id": "TXN-91001", "days_ago": 12, "direction": "credit", "amount": "60000.00", "descriptor": "IMPS/CLIENT PAYMENT/BRIGHTLEAF DESIGNS", "channel": "IMPS", "merchant": {"name": "Brightleaf Designs", "category": "Business income"}, "explanation": "Payment received from your client Brightleaf Designs via IMPS."},
+            {"id": "TXN-91002", "days_ago": 8, "direction": "debit", "amount": "17700.00", "descriptor": "NEFT/GSTN/CPIN2610KA", "channel": "NEFT", "merchant": {"name": "GST payment (GSTN)", "category": "Taxes"}, "explanation": "GST challan payment to the Goods and Services Tax Network against your CPIN."},
+            {"id": "TXN-91003", "days_ago": 6, "direction": "debit", "amount": "3540.00", "descriptor": "POS 7788 AWS EMEA SARL", "channel": "Debit Card (online)", "merchant": {"name": "Amazon Web Services", "category": "Cloud services"}, "recurring": true, "explanation": "Monthly Amazon Web Services cloud bill charged to your business debit card ending 7788."}
+          ]
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-1002",
+      "display_name": "Priya Nair",
+      "registered_address": {"line1": "22, 4th Cross, Indiranagar", "city": "Bengaluru", "pincode": "560038"},
+      "open_service_requests": [
+        {"sr_id": "SR-700245", "type": "cheque_book", "account_id": "ACC-1002-SB", "leaves": 25, "status": "Dispatched", "days_ago": 3, "eta_days_from_creation": 7}
+      ],
+      "accounts": [
+        {
+          "account_id": "ACC-1002-SB",
+          "account_number": "50100031923192",
+          "type": "Savings",
+          "product": "Classic Savings",
+          "currency": "INR",
+          "opening_balance": "12890.00",
+          "cheque_book_eligible": true,
+          "transactions": [
+            {"id": "TXN-92001", "days_ago": 10, "direction": "credit", "amount": "54000.00", "descriptor": "NEFT/SALARY/MERIDIAN HEALTHCARE", "channel": "NEFT", "merchant": {"name": "Meridian Healthcare", "category": "Salary"}, "explanation": "Monthly salary credited by your employer via NEFT."},
+            {"id": "TXN-92002", "days_ago": 9, "direction": "debit", "amount": "18000.00", "descriptor": "UPI/P2A/LANDLORD S RAO/Rent", "channel": "UPI", "merchant": {"name": "S Rao (personal transfer)", "category": "Rent"}, "explanation": "UPI transfer to S Rao with the note 'Rent'."},
+            {"id": "TXN-92003", "days_ago": 6, "direction": "debit", "amount": "1199.00", "descriptor": "POS 3192 SPOTIFY P1A2B3", "channel": "Debit Card (online)", "merchant": {"name": "Spotify India", "category": "Subscriptions"}, "recurring": true, "explanation": "Spotify subscription charged to your debit card ending 3192. This is the annual plan renewal, which is why it is higher than a monthly charge."},
+            {"id": "TXN-92004", "days_ago": 2, "direction": "debit", "amount": "350.00", "descriptor": "SMS ALERT CHGS Q3+GST", "channel": "Bank charge", "merchant": {"name": "Bank charges", "category": "Fees"}, "explanation": "Quarterly SMS alert charges for July-September including 18% GST."}
+          ]
+        }
+      ]
+    },
+    {
+      "customer_id": "CUST-1003",
+      "display_name": "Rohan Das",
+      "registered_address": {"line1": "House 7, Sector 3, Salt Lake", "city": "Kolkata", "pincode": "700091"},
+      "accounts": [
+        {
+          "account_id": "ACC-1003-BS",
+          "account_number": "50100088128812",
+          "type": "Savings",
+          "product": "Basic Savings (BSBDA)",
+          "currency": "INR",
+          "opening_balance": "3120.40",
+          "cheque_book_eligible": false,
+          "cheque_book_ineligible_reason": "Basic Savings Bank Deposit accounts do not include cheque book facility. The account can be upgraded to Classic Savings at a branch.",
+          "transactions": [
+            {"id": "TXN-93001", "days_ago": 6, "direction": "credit", "amount": "5000.00", "descriptor": "UPI/P2A/MOM/Pocket money", "channel": "UPI", "merchant": {"name": "Personal transfer", "category": "Transfers"}, "explanation": "UPI transfer received with the note 'Pocket money'."},
+            {"id": "TXN-93002", "days_ago": 3, "direction": "debit", "amount": "299.00", "descriptor": "UPI/JIOMART/RECHARGE", "channel": "UPI", "merchant": {"name": "JioMart", "category": "Mobile recharge"}, "explanation": "UPI payment for a mobile recharge on JioMart."}
+          ]
+        }
+      ]
+    }
+  ]
+}

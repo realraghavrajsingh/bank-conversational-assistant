@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: mock-bank
+server:
+  port: 8001
+bank:
+  # Shared secret for service-to-service calls (mTLS / workload identity in production).
+  service-key: ${BANK_SERVICE_KEY:dev-bank-service-key}
+  timezone: Asia/Kolkata
