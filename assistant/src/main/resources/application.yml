@@ -16,7 +16,7 @@ assistant:
     timeout: 30s
     gemini:
       api-key: ${GEMINI_API_KEY:}
-      model: ${GEMINI_MODEL:gemini-3.8-flash}
+      model: ${GEMINI_MODEL:gemini-flash-lite-latest}
       base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com/v1beta}
     openai:
       api-key: ${OPENAI_API_KEY:}
