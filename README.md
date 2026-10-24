@@ -46,7 +46,7 @@ java -jar assistant/target/assistant.jar
 
 | Provider | `.env` |
 |---|---|
-| Gemini (default) | `LLM_PROVIDER=gemini`, `GEMINI_API_KEY=…`, `GEMINI_MODEL=gemini-3.8-flash` |
+| Gemini (default) | `LLM_PROVIDER=gemini`, `GEMINI_API_KEY=…`, `GEMINI_MODEL=gemini-flash-lite-latest` |
 | OpenAI | `LLM_PROVIDER=openai`, `OPENAI_API_KEY=…`, `OPENAI_MODEL=gpt-5-mini` |
 | Ollama / vLLM / any OpenAI-compatible endpoint | `LLM_PROVIDER=openai`, `OPENAI_BASE_URL=http://localhost:11434/v1`, `OPENAI_MODEL=qwen3:8b` |
 
